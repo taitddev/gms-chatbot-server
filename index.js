@@ -1,5 +1,5 @@
 import express from "express";
-import cors from "cors";
+// import cors from "cors";
 import bodyParser from "body-parser";
 import env from "dotenv";
 import { Configuration, OpenAIApi } from "openai";
@@ -8,13 +8,23 @@ const app = express();
 
 env.config();
 
-app.use(
-  cors({
-    origin: ["http://127.0.0.1:5173", "https://gms-chatbot.vercel.app"],
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["http://127.0.0.1:5173", "https://gms-chatbot.vercel.app"],
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   })
+// );
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 app.use(bodyParser.json());
 
 // Configure open api
