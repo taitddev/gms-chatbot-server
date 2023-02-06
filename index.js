@@ -8,7 +8,13 @@ const app = express();
 
 env.config();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:5173", "https://gms-chatbot.vercel.app/"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
 // Configure open api
